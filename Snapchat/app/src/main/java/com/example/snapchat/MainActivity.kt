@@ -1,22 +1,18 @@
 package com.example.snapchat
 
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.EditText
 import com.google.firebase.auth.FirebaseAuth
 import android.widget.Toast
-import jdk.nashorn.internal.runtime.ECMAException.getException
 import com.google.firebase.auth.FirebaseUser
-import org.junit.experimental.results.ResultMatchers.isSuccessful
 import com.google.firebase.auth.AuthResult
 import com.google.android.gms.tasks.Task
 import com.google.android.gms.tasks.OnCompleteListener
 import android.R.attr.password
-import android.support.v4.app.SupportActivity
+import android.content.Intent
 import android.icu.lang.UCharacter.GraphemeClusterBreak.T
-import sun.jvm.hotspot.utilities.IntArray
-
+import androidx.appcompat.app.AppCompatActivity
 
 
 class MainActivity : AppCompatActivity() {
@@ -59,7 +55,8 @@ class MainActivity : AppCompatActivity() {
             }
     }
     fun logIn() {
-
+        val intent = Intent(this, SnapsActivity::class.java)
+        startActivity(intent)
     }
 
 }
