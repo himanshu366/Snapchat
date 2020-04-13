@@ -10,6 +10,8 @@ import android.widget.ImageView
 import androidx.core.widget.ImageViewCompat
 //import java.util.jar.Manifest
  import android.Manifest
+import android.app.Activity
+import java.lang.Exception
 
  class CreateSnapActivity : AppCompatActivity() {
 
@@ -31,6 +33,31 @@ import androidx.core.widget.ImageViewCompat
 
      } else {
          getPhoto()
+         }
+     }
+
+     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+         super.onActivityResult(requestCode, resultCode, data)
+
+         val seletedImage = data!!.data
+
+         if (requestCode == 1 && resultCode == Activity.RESULT_OK && data != null) {
+             try {
+                 val bitmap = MediaStore.Images.Media.getBitmap(this.contentResolver, seletedImage)
+                 createSnapImageView?.setImageBitmap(bitmap)
+             } catch (e: Exception) {
+                 e.printStackTrace()
+             }
+         }
+     }
+
+     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
+         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+
+         if (requestCode == 1) {
+             if (grantResults.size > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                 getPhoto()
+             }
          }
      }
 
