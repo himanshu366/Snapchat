@@ -9,30 +9,41 @@
 
     <ImageView
             android:layout_width="200dp"
-            android:layout_height="200dp" app:srcCompat="@color/colorAccent"
-            android:id="@+id/createSnapImageView" app:layout_constraintTop_toTopOf="parent"
-            android:layout_marginTop="16dp" android:layout_marginEnd="96dp"
+            android:layout_height="200dp"
+            app:srcCompat="@color/colorAccent"
+            android:id="@+id/createSnapImageView"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="96dp"
             app:layout_constraintEnd_toEndOf="parent"/>
     <Button
             android:text="Choose Image"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/chooseImageButton" android:layout_marginTop="16dp"
+            android:id="@+id/chooseImageButton"
+            android:layout_marginTop="16dp"
             app:layout_constraintTop_toBottomOf="@+id/createSnapImageView"
-            android:onClick="chooseImageClicked" tools:layout_editor_absoluteX="142dp"/>
+            android:onClick="chooseImageClicked"
+            tools:layout_editor_absoluteX="142dp"/>
     <EditText
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:inputType="textPersonName"
             android:ems="10"
-            android:id="@+id/messageEditText" android:layout_marginTop="16dp"
-            app:layout_constraintTop_toBottomOf="@+id/chooseImageButton" app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" android:hint="Message"/>
+            android:id="@+id/messageEditText"
+            android:layout_marginTop="16dp"
+            app:layout_constraintTop_toBottomOf="@+id/chooseImageButton"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:hint="Message"/>
     <Button
             android:text="NEXT"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/nextButton" android:layout_marginTop="16dp"
-            app:layout_constraintTop_toBottomOf="@+id/messageEditText" app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" android:onClick="nextClicked"/>
+            android:id="@+id/nextButton"
+            android:layout_marginTop="16dp"
+            app:layout_constraintTop_toBottomOf="@+id/messageEditText"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:onClick="nextClicked"/>
 </androidx.constraintlayout.widget.ConstraintLayout>
