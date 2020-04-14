@@ -104,7 +104,7 @@ private val UploadTask.TaskSnapshot.downloadUrl: Any
          val uploadTask = FirebaseStorage.getInstance().getReference().child("Images").child(imageName).putBytes(data)
          uploadTask.addOnFailureListener(OnFailureListener {
              // Handle unsuccessful uploads
-             Toast.makeText(this, "UPLOADFAILED", Toast.LENGTH_SHORT).show()
+             Toast.makeText(this, "UPLOAD FAILED", Toast.LENGTH_SHORT).show()
          }).addOnSuccessListener(OnSuccessListener<UploadTask.TaskSnapshot> { taskSnapshot ->
              val downloadUrl = taskSnapshot.downloadUrl
              Log.i("URL", downloadUrl.toString())
