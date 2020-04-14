@@ -94,6 +94,7 @@ private val UploadTask.TaskSnapshot.downloadUrl: Any
 
          //createSnapImageView?.buildDrawingCache()
 
+
          var bitmap1: Bitmap = BitmapFactory.decodeFile("/storage/emulated/0/WhatsApp/Media/WhatsApp Images/IMG-20200331-WA0000.jpg");
          //val bitmap = (createSnapImageView?.getDrawable() as BitmapDrawable).bitmap
          val baos = ByteArrayOutputStream()
