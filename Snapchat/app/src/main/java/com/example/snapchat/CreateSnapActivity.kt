@@ -11,15 +11,42 @@ import androidx.core.widget.ImageViewCompat
 //import java.util.jar.Manifest
  import android.Manifest
 import android.app.Activity
+import kotlinx.android.synthetic.main.activity_create_snap.*
 import java.lang.Exception
+import com.google.android.gms.tasks.OnSuccessListener
+import androidx.annotation.NonNull
+import com.google.android.gms.tasks.OnFailureListener
+import com.google.android.gms.common.util.IOUtils.toByteArray
+import android.graphics.Bitmap
+import android.graphics.drawable.BitmapDrawable
+import androidx.core.app.ComponentActivity.ExtraData
+import androidx.core.content.ContextCompat.getSystemService
+import android.icu.lang.UCharacter.GraphemeClusterBreak.T
+import android.util.Log
+import android.widget.EditText
+import android.widget.Toast
+import com.google.firebase.storage.FirebaseStorage
+import com.google.firebase.storage.UploadTask
+//import sun.jvm.hotspot.utilities.IntArray
+import java.io.ByteArrayOutputStream
+import java.util.*
+
+
+ private val UploadTask.TaskSnapshot.downloadUrl: Any
+     get() {}
 
  class CreateSnapActivity : AppCompatActivity() {
 
     var createSnapImageView: ImageView? = null
+     var messageEditText: EditText? = null
+     val imageName = UUID.randomUUID().toString() + ".jpg"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_create_snap)
+
+        createSnapImageView = findViewById(R.id.createSnapImageView)
+        messageEditText = findViewById(R.id.messageEditText)
     }
 
      fun getPhoto() {
@@ -59,6 +86,26 @@ import java.lang.Exception
                  getPhoto()
              }
          }
+     }
+
+     fun nextClicked(view: View) {
+         createSnapImageView?.setDrawingCacheEnabled(true)
+         createSnapImageView?.buildDrawingCache()
+         val bitmap = (createSnapImageView?.getDrawable() as BitmapDrawable).bitmap
+         val baos = ByteArrayOutputStream()
+         bitmap?.compress(Bitmap.CompressFormat.JPEG, 100, baos)
+         val data = baos.toByteArray()
+
+
+         val uploadTask = FirebaseStorage.getInstance().getReference().child("Images").child(imageName)
+             .putBytes(data)
+         uploadTask.addOnFailureListener(OnFailureListener {
+             // Handle unsuccessful uploads
+             Toast.makeText(this, "UPLOADFAILED", Toast.LENGTH_SHORT).show()
+         }).addOnSuccessListener { taskSnapshot ->
+             val downloadUrl = taskSnapshot.downloadUrl
+             Log.i("URL", downloadUrl.toString())
+         };
      }
 
 }
